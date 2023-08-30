@@ -22,8 +22,12 @@ public class Categoria {
 	// constructor
 	public Categoria(String nombre) {
 		this.nombre = nombre;
+	}	
+	// constructor default
+	public Categoria() {
 	}
-	
+
+
 	// getters and setters
 	public Integer getId() {
 		return id;

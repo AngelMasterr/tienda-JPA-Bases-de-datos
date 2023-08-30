@@ -40,6 +40,10 @@ public class Producto {
 		this.precio = precio;
 		this.categoria = categoria;
 	}
+	// Constructor default
+	public Producto() {
+	}
+
 	// getters and setters
 	public Long getId() {
 		return id;

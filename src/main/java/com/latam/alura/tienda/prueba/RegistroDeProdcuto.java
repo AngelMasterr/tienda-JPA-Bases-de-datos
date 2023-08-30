@@ -17,25 +17,29 @@ public class RegistroDeProdcuto {
 	public static void main(String[] args) {
 		
 		Categoria celulares = new Categoria("CELULARES");		
-		Producto celular = new Producto("Samsung", "telefono usado", new BigDecimal("1000"), celulares);			
+				
 		
 		// EntityManager: interfaz que proporciona métodos para realizar operaciones de persistencia
 		EntityManager em = JPAUtils.getEntityManager();
-		
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-		ProductoDao productoDao = new ProductoDao(em);
-		
-		// begin(): indica el comienzo de una nueva transacción.
+						
+		// getTransaction().begin(): indica el comienzo de una nueva transacción.
 		// persist(): llevar un objeto en memoria y lo almacena como una fila nueva en la base de datos
-		// commit(): indica que la transacción se ha completado con éxito y que los cambios realizados, como la inserción de la nueva fila en la tabla, deben ser confirmados en la base de datos.
+		// getTransaction().commit(): indica que la transacción se ha completado con éxito y que los cambios realizados, como la inserción de la nueva fila en la tabla, deben ser confirmados en la base de datos.
+		// flush(): aplica los cambios en la base de datos pero la transacción no se completa. (es un commit pero si hay un error la transaccion no se confirma)
+		// merge(): es cuando tienes una entidad que no está siendo rastreada por el EntityManager, pero deseas que sus cambios se reflejen en la base de datos
 		// close(): Esto libera los recursos asociados y finaliza la conexión con la base de datos. Cerrar el EntityManager también finaliza cualquier transacción abierta.
+		// clear(): limpia el caché de entidades administradas por el EntityManager, desvinculándolas y permitiendo que se recarguen desde la base de datos si es necesario.
 		em.getTransaction().begin();	
+		em.persist(celulares);
+		em.flush();
+		em.clear();
 		
-		categoriaDao.guardar(celulares);
-		productoDao.guardar(celular);	
+		celulares = em.merge(celulares);
+		celulares.setNombre("carnes");
+		em.flush();
 		
-		em.getTransaction().commit();
-		em.close();
+		em.remove(celulares);
+		em.flush();
 		
 	}
 
