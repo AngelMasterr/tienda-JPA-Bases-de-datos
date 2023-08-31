@@ -12,7 +12,7 @@ import com.latam.alura.tienda.modelo.Categoria;
 import com.latam.alura.tienda.modelo.Producto;
 import com.latam.alura.tienda.utils.JPAUtils;
 
-public class RegistroDeProdcuto {
+public class RegistroDeProdcutoPrueba {
 
 	public static void main(String[] args) {
 		
