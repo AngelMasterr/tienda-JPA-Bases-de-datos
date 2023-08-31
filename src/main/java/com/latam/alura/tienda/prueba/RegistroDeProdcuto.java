@@ -1,10 +1,9 @@
 package com.latam.alura.tienda.prueba;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import com.latam.alura.tienda.dao.CategoriaDao;
 import com.latam.alura.tienda.dao.ProductoDao;
@@ -16,11 +15,36 @@ public class RegistroDeProdcuto {
 
 	public static void main(String[] args) {
 		
+		registrarProducto();	
+		
+		EntityManager em = JPAUtils.getEntityManager();		
+		ProductoDao productoDao = new ProductoDao(em);
+		Producto producto = productoDao.consultaPorId(1l);
+		System.out.println(producto.getNombre() +" "+ producto.getPrecio() +" dolares");	
+		
+		List<Producto> productos = productoDao.consultarTodo();
+		productos.forEach(prod -> System.out.println(prod.getDescripción()));
+		
+		List<Producto> productos1 = productoDao.consultarPorNombre("Xiaomi Redmi");
+		productos1.forEach(prod -> System.out.println(prod.getDescripción()));	
+		
+		List<Producto> productos2 = productoDao.consultarPorNombreDeCategoria("CELULARES");
+		productos2.forEach(prod -> System.out.println(prod.getDescripción()));	
+		
+		BigDecimal precio = productoDao.consultarPrecioPorNombreDeProducto("Xiaomi Redmi");
+		System.out.println("vale: " + precio);
+		
+	}
+
+	private static void registrarProducto() {
 		Categoria celulares = new Categoria("CELULARES");		
-				
+		Producto celular = new Producto("Xiaomi Redmi", "8GB ram", new BigDecimal("1000"), celulares);
 		
 		// EntityManager: interfaz que proporciona métodos para realizar operaciones de persistencia
 		EntityManager em = JPAUtils.getEntityManager();
+		
+		CategoriaDao categoriaDao = new CategoriaDao(em);
+		ProductoDao productoDao = new ProductoDao(em);
 						
 		// getTransaction().begin(): indica el comienzo de una nueva transacción.
 		// persist(): llevar un objeto en memoria y lo almacena como una fila nueva en la base de datos
@@ -30,19 +54,11 @@ public class RegistroDeProdcuto {
 		// close(): Esto libera los recursos asociados y finaliza la conexión con la base de datos. Cerrar el EntityManager también finaliza cualquier transacción abierta.
 		// clear(): limpia el caché de entidades administradas por el EntityManager, desvinculándolas y permitiendo que se recarguen desde la base de datos si es necesario.
 		em.getTransaction().begin();	
-		em.persist(celulares);
-		em.flush();
-		em.clear();
-		
-		// como se uso el clear, eso limpia el registro por eso es necesario hacer un merge para volver a seleccionarlo
-		
-		celulares = em.merge(celulares);
-		celulares.setNombre("carnes");
-		em.flush();
-		
-		em.remove(celulares);
-		em.flush();
-		
-	}
 
+		categoriaDao.guardar(celulares);
+		productoDao.guardar(celular);
+		
+		em.getTransaction().commit();
+		em.close();
+	}
 }
