@@ -32,7 +32,7 @@ public class RegistroDeProdcuto {
 		productos2.forEach(prod -> System.out.println(prod.getDescripción()));	
 		
 		BigDecimal precio = productoDao.consultarPrecioPorNombreDeProducto("Xiaomi Redmi");
-		System.out.println("vale: " + precio);
+		System.out.println("vale: " + precio + " dolares");
 		
 	}
 
