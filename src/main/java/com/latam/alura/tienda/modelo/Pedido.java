@@ -2,12 +2,17 @@ package com.latam.alura.tienda.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 //@Entity: marca una clase Java como una entidad persistente, los objetos de esta clase serán mapeados a registros en una base de datos
@@ -23,17 +28,26 @@ public class Pedido {
 	private Integer id;
 	private LocalDate fecha = LocalDate.now();
 	private BigDecimal valorTotal;
+	
 	@ManyToOne
 	private Cliente cliente;
 	
+	@OneToMany(mappedBy = "pedido")
+	private List<itemsPedido> items = new ArrayList<itemsPedido>();
+	
 	// constructor default
 	public Pedido() {}
-
+	
 	// constructor
 	public Pedido(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
+	public void agregarItems(itemsPedido item) {
+		item.setPedido(this);
+		this.items.add(item);
+	}
+	
 	// getters and setters
 	public Integer getId() {
 		return id;

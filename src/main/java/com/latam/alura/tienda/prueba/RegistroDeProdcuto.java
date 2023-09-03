@@ -20,16 +20,16 @@ public class RegistroDeProdcuto {
 		EntityManager em = JPAUtils.getEntityManager();		
 		ProductoDao productoDao = new ProductoDao(em);
 		Producto producto = productoDao.consultaPorId(1l);
-		System.out.println(producto.getNombre() +" "+ producto.getPrecio() +" dolares");	
+		//System.out.println(producto.getNombre() +" "+ producto.getPrecio() +" dolares");	
 		
 		List<Producto> productos = productoDao.consultarTodo();
-		productos.forEach(prod -> System.out.println(prod.getDescripción()));
+		//productos.forEach(prod -> System.out.println(prod.getDescripción()));
 		
 		List<Producto> productos1 = productoDao.consultarPorNombre("Xiaomi Redmi");
-		productos1.forEach(prod -> System.out.println(prod.getDescripción()));	
+		//productos1.forEach(prod -> System.out.println(prod.getDescripción()));	
 		
 		List<Producto> productos2 = productoDao.consultarPorNombreDeCategoria("CELULARES");
-		productos2.forEach(prod -> System.out.println(prod.getDescripción()));	
+		//productos2.forEach(prod -> System.out.println(prod.getDescripción()));	
 		
 		BigDecimal precio = productoDao.consultarPrecioPorNombreDeProducto("Xiaomi Redmi");
 		System.out.println("vale: " + precio + " dolares");
