@@ -11,9 +11,9 @@
         <class>com.latam.alura.tienda.Producto</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:tienda"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:D:\ANGEL\0. JAVA ECLIPSE\BD JPA_H2\tienda1"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
-            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.password" value="Program3@"/>
             
             <property name="hibernate.show_sql" value="true"/> <!-- Mostrar SQL generados -->
             <property name="hibernate.format_sql" value="true"/> <!-- Dar formato SQL generados -->

@@ -23,6 +23,15 @@ public class ProductoDao {
 		this.em.persist(producto);		
 	}
 	
+	public void actualizar(Producto producto) {
+		this.em.merge(producto);
+	}
+	
+	public void remover(Producto producto) {
+		producto = this.em.merge(producto);
+		this.em.remove(producto);
+	}
+	
 	public Producto consultaPorId(Long id) {
 		return em.find(Producto.class, id);
 	} 
