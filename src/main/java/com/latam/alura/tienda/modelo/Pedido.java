@@ -47,7 +47,7 @@ public class Pedido {
 	public void agregarItems(itemsPedido item) {
 		item.setPedido(this);
 		this.items.add(item);
-		this.valorTotal = this.valorTotal.add(item.getValor());
+		this.valorTotal = this.valorTotal.add(item.getValor()); 
 	}
 	
 	// getters and setters

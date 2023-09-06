@@ -44,7 +44,7 @@ public class RegistroDeProdcuto {
 		EntityManager em = JPAUtils.getEntityManager();
 		
 		CategoriaDao categoriaDao = new CategoriaDao(em);
-		ProductoDao productoDao = new ProductoDao(em);
+		ProductoDao productoDao = new ProductoDao(em); 
 						
 		// getTransaction().begin(): indica el comienzo de una nueva transacción.
 		// persist(): llevar un objeto en memoria y lo almacena como una fila nueva en la base de datos

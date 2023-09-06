@@ -15,6 +15,7 @@ import com.latam.alura.tienda.modelo.Pedido;
 import com.latam.alura.tienda.modelo.Producto;
 import com.latam.alura.tienda.modelo.itemsPedido;
 import com.latam.alura.tienda.utils.JPAUtils;
+import com.latam.alura.tienda.vo.RelatorioDeVentas;
 
 public class RegistroDePedido {
 
@@ -40,11 +41,19 @@ public class RegistroDePedido {
 		pedidoDao.guardar(pedido);
 		
 		em.getTransaction().commit();
+		
+		BigDecimal valorTotal = pedidoDao.valorTotalVendido();
+		System.out.println("Valor total: " + valorTotal);
+		
+		List<RelatorioDeVentas> relatorio= pedidoDao.relatorioDeVentasVO();
+		
+		relatorio.forEach(System.out::println); 
+		
 	}
 
 	private static void registrarProducto() {
 		Categoria celulares = new Categoria("CELULARES");		
-		Producto celular = new Producto("Xiaomi Redmi", "8GB ram", new BigDecimal("1000"), celulares);
+		Producto celular = new Producto("Xiaomi Redmi", "8GB ram", new BigDecimal("1200"), celulares);
 		
 		// EntityManager: interfaz que proporciona métodos para realizar operaciones de persistencia
 		EntityManager em = JPAUtils.getEntityManager();
@@ -68,3 +77,7 @@ public class RegistroDePedido {
 		em.close();
 	}
 }
+
+
+
+

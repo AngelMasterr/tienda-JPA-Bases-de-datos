@@ -19,7 +19,7 @@ public class ProductoDao {
 	}
 	
 	// persist(): llevar un objeto en memoria y lo almacena como una fila nueva en la base de datos
-	public void guardar(Producto producto) {
+	public void guardar(Producto producto) { 
 		this.em.persist(producto);		
 	}
 	
@@ -51,9 +51,8 @@ public class ProductoDao {
 		return em.createQuery(jpql, Producto.class).setParameter("nombre", nombre).getResultList();
 	}	
 	
-	public BigDecimal consultarPrecioPorNombreDeProducto(String nombre) {
-		String jpql = "SELECT P.precio FROM Producto AS P WHERE P.nombre =: nombre";
-		return em.createQuery(jpql, BigDecimal.class).setParameter("nombre", nombre).getSingleResult();
+	public BigDecimal consultarPrecioPorNombreDeProducto(String nombre) {		
+		return em.createNamedQuery("Producto.consultaDePrecio", BigDecimal.class) .setParameter("nombre", nombre).getSingleResult();
 	}
 	
 
