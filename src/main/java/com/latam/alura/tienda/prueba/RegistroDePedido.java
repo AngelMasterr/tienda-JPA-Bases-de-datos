@@ -13,7 +13,7 @@ import com.latam.alura.tienda.modelo.Categoria;
 import com.latam.alura.tienda.modelo.Cliente;
 import com.latam.alura.tienda.modelo.Pedido;
 import com.latam.alura.tienda.modelo.Producto;
-import com.latam.alura.tienda.modelo.itemsPedido;
+import com.latam.alura.tienda.modelo.ItemsPedido;
 import com.latam.alura.tienda.utils.JPAUtils;
 import com.latam.alura.tienda.vo.RelatorioDeVentas;
 
@@ -33,7 +33,7 @@ public class RegistroDePedido {
 		
 		Cliente cliente = new Cliente("Juan", "C.123456");
 		Pedido pedido = new Pedido(cliente);
-		pedido.agregarItems(new itemsPedido(5, producto, pedido));
+		pedido.agregarItems(new ItemsPedido(5, producto, pedido));
 		
 		em.getTransaction().begin();
 		

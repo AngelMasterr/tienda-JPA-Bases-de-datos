@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Producto {
 	private LocalDate FechaDeRegistro = LocalDate.now();
 	// @ManyToOne :representar una relación en la que varios registros de una tabla (Categoria) se asocian con un solo 
 	// registro en otra tabla (Producto).
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	private Categoria categoria;
 	
 	

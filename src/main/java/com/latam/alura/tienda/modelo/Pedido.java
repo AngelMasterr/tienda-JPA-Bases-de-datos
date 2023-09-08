@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,15 +27,15 @@ public class Pedido {
 	// @GeneratedValue(strategy = GenerationType.IDENTITY): genera automáticamente los valores para la clave primarias
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private LocalDate fecha = LocalDate.now();
 	private BigDecimal valorTotal = new BigDecimal(0);
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-	private List<itemsPedido> items = new ArrayList<itemsPedido>();
+	private List<ItemsPedido> items = new ArrayList<ItemsPedido>();
 	
 	// constructor default
 	public Pedido() {}
@@ -44,17 +45,17 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public void agregarItems(itemsPedido item) {
+	public void agregarItems(ItemsPedido item) {
 		item.setPedido(this);
 		this.items.add(item);
 		this.valorTotal = this.valorTotal.add(item.getValor()); 
 	}
 	
 	// getters and setters
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

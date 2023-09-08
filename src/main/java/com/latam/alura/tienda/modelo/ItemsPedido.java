@@ -3,6 +3,7 @@ package com.latam.alura.tienda.modelo;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "itemsPedido")
-public class itemsPedido {	
+public class ItemsPedido {	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +20,16 @@ public class itemsPedido {
 	
 	private Integer cantidad;
 	private BigDecimal precioUnitario;
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	private Producto producto;
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	private Pedido pedido;
 		
 	// constructor default
-	public itemsPedido() {}
+	public ItemsPedido() {}
 	
 	//constructor
-	public itemsPedido(Integer cantidad, Producto producto, Pedido pedido) {
+	public ItemsPedido(Integer cantidad, Producto producto, Pedido pedido) {
 		super();
 		this.cantidad = cantidad;
 		this.producto = producto;
