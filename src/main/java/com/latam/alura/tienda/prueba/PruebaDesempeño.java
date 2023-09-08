@@ -25,6 +25,7 @@ public class PruebaDesempeño {
 		//System.out.println(pedido.getValorTotal());
 		System.out.println(pedidoConCliente.getCliente().getNombre());
 		
+		
 	}
 
 }
