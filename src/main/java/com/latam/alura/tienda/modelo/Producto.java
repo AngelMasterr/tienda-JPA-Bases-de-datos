@@ -32,7 +32,7 @@ public class Producto {
 	private String nombre;
 	private String descripción;
 	private BigDecimal precio;
-	private LocalDate FechaDeRegistro = LocalDate.now();
+	private LocalDate fechaDeRegistro = LocalDate.now();
 	// @ManyToOne :representar una relación en la que varios registros de una tabla (Categoria) se asocian con un solo 
 	// registro en otra tabla (Producto).
 	@ManyToOne (fetch = FetchType.LAZY)
@@ -63,7 +63,7 @@ public class Producto {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescripción() {
+	public String getDescripcion() {
 		return descripción;
 	}
 	public void setDescripción(String descripción) {
