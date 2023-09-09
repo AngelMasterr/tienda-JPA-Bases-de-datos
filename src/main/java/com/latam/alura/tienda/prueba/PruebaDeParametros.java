@@ -18,9 +18,10 @@ public class PruebaDeParametros {
 		EntityManager em = JPAUtils.getEntityManager();
 		ProductoDao productoDao =new ProductoDao(em);
 		
-		List<Producto> resultado = productoDao.consultarPorParametros("FIFA", new BigDecimal(10000), null);
+		List<Producto> resultado = productoDao.consultarPorParametrosConAPICriteria("X", null, null);
 		
 		System.out.println(resultado.get(0).getDescripcion());
+		System.out.println(resultado.get(0).getPrecio());
 	}
 
 	private static void cargarBancoDeDatos() {
