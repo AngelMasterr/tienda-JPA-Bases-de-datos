@@ -62,6 +62,7 @@ public class ProductoDao {
 		return em.createNamedQuery("Producto.consultaDePrecio", BigDecimal.class).setParameter("nombre", nombre)
 				.getSingleResult();
 	}
+		
 
 	public List<Producto> consultarPorParametros(String nombre, BigDecimal precio, LocalDate fecha){
 		StringBuilder jpql = new StringBuilder("SELECT p FROM Producto p WHERE 1=1 ");
