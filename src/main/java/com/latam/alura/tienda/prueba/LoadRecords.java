@@ -51,8 +51,20 @@ public class LoadRecords {
 		
 	}
 	
+	private static void loadCategoria(String type, CategoriaDao categoriaDao,EntityManager em) throws FileNotFoundException {
+		List<String> categoriasTxt = readFile(type);		
+		for(int i=0;i<categoriasTxt.size();i++) {
+			String[] line = categoriasTxt.get(i).split(";");
+			if(line.length==1) {
+				Categoria categoria = new Categoria(categoriasTxt.get(i));
+				categoriaDao.guardar(categoria);
+				em.flush();	
+			}
+		}
+	}
+	
 	private static void loadProducto(String type, ProductoDao productoDao,CategoriaDao categoriaDao, EntityManager em) throws FileNotFoundException {
-		List<String> productosTxt =readFile(type);
+		List<String> productosTxt = readFile(type);
 		for(int i=0;i<productosTxt.size();i++) {
 			String[] line = productosTxt.get(i).split(";");
 			if(line.length>1) {
@@ -64,20 +76,8 @@ public class LoadRecords {
 		}
 	}
 
-	private static void loadCategoria(String type, CategoriaDao categoriaDao,EntityManager em) throws FileNotFoundException {
-		List<String> categoriasTxt =readFile(type);		
-		for(int i=0;i<categoriasTxt.size();i++) {
-			String[] line = categoriasTxt.get(i).split(";");
-			if(line.length==1) {
-				Categoria categoria = new Categoria(categoriasTxt.get(i));
-				categoriaDao.guardar(categoria);
-				em.flush();	
-			}
-		}
-	}
-
 	private static void loadCliente(String type, ClienteDao clienteDao,EntityManager em) throws FileNotFoundException {
-		List<String> clientesTxt =readFile(type);		
+		List<String> clientesTxt = readFile(type);		
 		for(int i=0;i<clientesTxt.size();i++) {
 			String[] line = clientesTxt.get(i).split("~");
 			System.out.println(line[0]+line[1]);

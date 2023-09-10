@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.Table;
@@ -18,10 +20,14 @@ import org.hibernate.annotations.NamedQuery;
 
 // @Entity: marca una clase Java como una entidad persistente, los objetos de esta clase serán mapeados a registros en una base de datos
 // @Table: especifica el nombre de la tabla en la base de datos a la cual la entidad será mapeada.
+// @SuppressWarnings("all"): suprime todas las advertencias generadas por el compilador o el entorno de desarrollo (IDE)
+// @Inheritance(strategy = InheritanceType.SINGLE_TABLE): especificar la estrategia de herencia que se debe utilizar en una jerarquía de clases cuando se mapean a una base de datos
+// crea una única tabla en la base de datos para representar todas las tablas en las clases en la jerarquía de herencia
 @SuppressWarnings("all")
 @Entity
 @Table(name="productos")
 @NamedQuery(name = "Producto.consultaDePrecio", query = "SELECT P.precio FROM Producto AS P WHERE P.nombre =: nombre")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Producto {
 	
 	// @Id: Indica que este campo es la clave primaria de la entidad 

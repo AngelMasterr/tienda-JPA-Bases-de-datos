@@ -1,5 +1,7 @@
 package com.latam.alura.tienda.modelo;
 
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,35 +13,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "categorias")
 public class Categoria {
-	
-	// @Id: Indica que este campo es la clave primaria de la entidad 
-	// @GeneratedValue(strategy = GenerationType.IDENTITY): genera automáticamente los valores para la clave primarias
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String nombre;
 		
-	// constructor
-	public Categoria(String nombre) {
-		this.nombre = nombre;
-	}	
+	// Crear una clase "CategoriaId" para crear una llave que sea compuesta con nombre y contraseña	
+	@ EmbeddedId
+	private CategoriaId categoriaId;
+		
+		
 	// constructor default
 	public Categoria() {
 	}
-
+	// constructor
+	public Categoria(String nombre) {
+		this.categoriaId = new CategoriaId(nombre, "456");		
+	}	
 
 	// getters and setters
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getNombre() {
-		return nombre;
+		return categoriaId.getNombre();
 	}
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.categoriaId.setNombre(nombre);
 	}
 	
 }

@@ -54,7 +54,7 @@ public class ProductoDao {
 	}
 
 	public List<Producto> consultarPorNombreDeCategoria(String nombre) {
-		String jpql = "SELECT P FROM Producto AS P WHERE P.categoria.nombre = :nombre";
+		String jpql = "SELECT P FROM Producto AS P WHERE P.categoria.nombre() = :nombre";
 		return em.createQuery(jpql, Producto.class).setParameter("nombre", nombre).getResultList();
 	}
 
@@ -69,7 +69,7 @@ public class ProductoDao {
 		if (nombre != null && !nombre.trim().isEmpty()) {
 			jpql.append("AND p.nombre = :nombre ");
 		}
-		if (precio != null && precio.equals(new BigDecimal(0))) {
+		if (precio != null && !precio.equals(new BigDecimal(0))) {
 			jpql.append("AND p.precio = :precio ");
 		}
 		if (fecha != null) {
@@ -80,7 +80,7 @@ public class ProductoDao {
 		if (nombre != null && !nombre.trim().isEmpty()) {
 			query.setParameter("nombre", nombre);
 		}
-		if (precio != null && precio.equals(new BigDecimal(0))) {
+		if (precio != null && !precio.equals(new BigDecimal(0))) {
 			query.setParameter("precio", precio);
 		}
 		if (fecha != null) {
@@ -101,7 +101,7 @@ public class ProductoDao {
 			filtro = builder.and(filtro, builder.equal(from.get("nombre"), nombre));
 		}
 		
-		if (precio != null && precio.equals(new BigDecimal(0))) {
+		if (precio != null && !precio.equals(new BigDecimal(0))) {
 			filtro = builder.and(filtro, builder.equal(from.get("precio"), precio));
 		}
 		

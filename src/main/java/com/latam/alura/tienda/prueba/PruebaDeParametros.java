@@ -18,12 +18,9 @@ public class PruebaDeParametros {
 		EntityManager em = JPAUtils.getEntityManager();
 		ProductoDao productoDao =new ProductoDao(em);
 		
-		List<Producto> resultado = productoDao.consultarPorParametrosConAPICriteria(null, null, null);
-		
-		List<Producto> resultado2 = em.createQuery("SELECT p FROM Producto p", Producto.class).getResultList();
-		
+		List<Producto> resultado = productoDao.consultarPorParametros(null, new BigDecimal(7000), null);
+				
 		System.out.println(resultado.get(0).getDescripcion());
-		System.out.println(resultado2.get(2).getPrecio());
 	}
 
 	private static void cargarBancoDeDatos() {
@@ -32,8 +29,8 @@ public class PruebaDeParametros {
 		Categoria electronicos = new Categoria("ELECTRONICOS");
 
 		Producto celular = new Producto("X", "producto nuevo", new BigDecimal(10000), celulares);
-		Producto videoJuego = new Producto("FIFA", "2000", new BigDecimal(5000), videoJuegos);
-		Producto memoria = new Producto("memoria ram", "30 GB", new BigDecimal(7000), electronicos);
+		Producto videoJuego = new Producto("FIFA", "X-2000-Pro", new BigDecimal(5000), videoJuegos);
+		Producto memoria = new Producto("memoria ram", "Capacidad: 30 GB", new BigDecimal(7000), electronicos);
 
 		EntityManager em = JPAUtils.getEntityManager();
 		ProductoDao productoDao = new ProductoDao(em);
